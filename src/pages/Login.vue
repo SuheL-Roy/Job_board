@@ -34,7 +34,11 @@
  import { reactive } from "vue";
  import Button from '../components/Form/Button.vue';
  import useForm from '../hooks/UserForm';
+ import api from '../helper/api';
+ import useAuthStore from '../store/Auth';
  const router = useRouter();
+
+ const auth = useAuthStore()
 
  const { submit, getErrorMessage, response, loading } = useForm();
 
@@ -45,8 +49,11 @@
  });
 
  const handleSubmit = async (e) => {
- submit(form, "/api/auth/login").then((response) => {
-    router.push({ name: "home" });
+ submit(form, "/api/auth/login").then(async({ token }) => {
+   localStorage.setItem('token',token);
+   api.setHeader("Authorization", `Bearer ${token}`)
+   await auth.boot();
+   router.push({ name: "home" });
     //console.log(response);
   });
 }

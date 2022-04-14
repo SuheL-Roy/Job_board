@@ -13,7 +13,7 @@
   >
     <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
 
-    <nav v-if="loggedIn" class="flex gap-4 items-center">
+    <nav v-if="auth.loggedIn" class="flex gap-4 items-center">
       <a class="text-base" href="#">My posts</a>
       <a class="text-base button" href="#">
         <svg
@@ -30,6 +30,8 @@
         </svg>
         <span>Post a job</span>
       </a>
+      <p>{{ auth.user.name }}</p>
+      <button @click="logout">Logout</button>
     </nav>
     <nav v-else class="flex gap-4 items-center">
       <router-link class="text-base" :to="{ name:'login' }">Login</router-link>
@@ -53,5 +55,20 @@
 </template>
 
 <script setup>
-let loggedIn = false;
+import useAuthStore from "../store/Auth";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
+//let loggedIn = false;
+const auth =  useAuthStore();
+
+const logout =()=> {
+  // console.log('hi');
+  auth.logout().then(()=>{
+    router.push({ name:'login'})
+  }).catch((err)=>{
+    alert('something went wrong');
+  })
+}
+
 </script>

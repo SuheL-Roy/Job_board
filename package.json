@@ -12,6 +12,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "apisauce": "^2.1.5",
     "axios": "^0.26.1",
+    "pinia": "^2.0.13",
     "typography": "^0.16.21",
     "vue": "^3.2.25",
     "vue-router": "4"

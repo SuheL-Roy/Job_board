@@ -19,7 +19,7 @@ const submit = (payload,endpoint, method= "post") =>{
         const {ok,data,originalError} = await api[method](endpoint,payload);
         if(ok){
             resolve(data);
-            loading,value = false;
+            loading.value = false;
         }else{
             errors.value = originalError.response.data.errors;
             reject(originalError);
