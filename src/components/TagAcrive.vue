@@ -49,20 +49,7 @@ const loadjobs = async() => {
 onMounted(() => {
   loading.value = true;
   loadjobs()
-  // PaginationLoad.value = true;
-
-//   const { ok, data } = await api.get(`/api/tags/${route.params.slug}/jobs`);
-
-//   if (!ok) alert("something went wrong");
-
-//   loading.value = false;
-
-//   jobs.value = data.data;
-
-//   pagination.last_page = data.meta.last_page;
-//   pagination.page = data.meta.current_page;
-
-  //console.log(data.data);
+  
 });
 
 watch(
@@ -72,20 +59,7 @@ watch(
     if(route.params.slug){
      loadjobs();
     }
-    
-
-    // PaginationLoad.value = true;
-
-    // const { ok, data } = await api.get(`/api/tags/${route.params.slug}/jobs`);
-
-    // if (!ok) alert("something went wrong");
-
-    // loading.value = false;
-
-    // jobs.value = data.data;
-
-    // pagination.last_page = data.meta.last_page;
-    // pagination.page = data.meta.current_page;
+  
   }
 );
 

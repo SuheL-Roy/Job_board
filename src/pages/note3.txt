@@ -1,3 +1,23 @@
+
+<template>
+  <suspense>
+    <template #fallback>
+      <Loading :active="true" />
+    </template>
+    <Job />
+  </suspense>
+</template>
+
+<script setup>
+import Job from "../components/Job.vue";
+import Loading from "vue-loading-overlay";
+</script>
+
+<style>
+</style>
+
+
+
 <template>
   <div
     class="flex justify-between p-4 pb-2 border-t-2 border-b-2 border-gray-200 group"
@@ -23,7 +43,7 @@
             />
           </svg>
 
-          <h2 class="font-bold leading-none">{{job.title}}</h2>
+          <h2 class="font-bold leading-none">{{ job.title }}</h2>
         </div>
 
         <a href="#" class="text-sm">{{job.company.name}}</a>
@@ -45,9 +65,9 @@
         </div>
       </div>
 
-      <div class="w-full mb-2 md:w-4/12">
+      <div class="w-full mb-2 md:w-4/12" v-if="job.tags.length">
         <router-link
-          :to="{ name:'tagArchive', params:{ slug:tag.slug} }"
+          :to="{ name:'tagArchive',params:{ slug:tag.slug} }"
           v-for="tag in job.tags" :key="tag.id"
           class="inline-block px-3 py-1 mr-2 text-gray-600 bg-white border-2 border-gray-300 rounded-lg"
         >
@@ -59,8 +79,7 @@
         <slot name="action">
           <div class="flex gap-2 transition-opacity duration-200 opacity-100">
             <router-link
-              v-if="show_details_button"
-              :to="{name:'jobDetails', params:{ slug:job.slug}}" 
+              href="#"
               class="inline-block px-3 py-2 font-bold text-indigo-400 bg-white border-2 border-indigo-400 rounded-lg hover:text-opacity-80"
             >
               Details
@@ -79,17 +98,76 @@
 </template>
 
 <script setup>
+
 defineProps({
 
   job:{
     type: Object,
     required: true,
     
-  },
-   show_details_button: {
-    type: Boolean,
-    default: true,
-  },
+  }
 })
-
 </script>
+
+/*****isu solving code *****/
+
+
+<template>
+  <div class="max-w-6xl mx-auto">
+    <Loading :active="loading" />
+    <JobList v-for="job in jobs" :key="job.id" :job="job" />
+    <div ref="target"  class="my-8 text-center">
+      <SyncLoader color="#6560EC" v-if="PaginationLoad"/>
+   </div>
+  </div>
+</template>
+
+<script setup>
+ import api from "../helper/api";
+import { useIntersectionObserver } from "@vueuse/core";
+import SyncLoader from "vue-spinner/src/SyncLoader.vue"
+import JobList from "../components/JobList.vue";
+import Loading from "vue-loading-overlay";
+import { onMounted, reactive, ref } from "vue";
+const loading = ref(false);
+const PaginationLoad = ref(false);
+
+const jobs = ref([]);
+const target = ref(null);
+
+const pagination = reactive({
+  page:1,
+  last_page:null
+}) 
+
+//console.log(jobs);
+onMounted(async () => {
+  loading.value = true;
+  //PaginationLoad.value = true;
+
+  const { ok, data } = await api.get("/api/jobs");
+
+  if (!ok) alert("something went wrong");
+
+  loading.value = false;
+
+  jobs.value = data.data;
+
+  pagination.last_page= data.meta.last_page;
+  pagination.page=data.meta.current_page;
+
+  console.log(data.data);
+});
+
+useIntersectionObserver(target, async([{ isIntersecting }]) => {
+  if(isIntersecting && pagination.page < pagination.last_page){
+   PaginationLoad.value = true;
+   const { ok, data } = await api.get(`/api/jobs?page=${++pagination.page}`);
+   if(!ok) alert('failed to job load');
+   jobs.value = [...jobs.value,...data.data];
+   PaginationLoad.value = false;
+  }
+});
+</script>
+
+<style></style>
