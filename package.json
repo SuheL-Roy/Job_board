@@ -10,12 +10,16 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
+    "@vueuse/core": "^8.2.6",
     "apisauce": "^2.1.5",
     "axios": "^0.26.1",
     "pinia": "^2.0.13",
     "typography": "^0.16.21",
     "vue": "^3.2.25",
-    "vue-router": "4"
+    "vue-loading-overlay": "^5.0.3",
+    "vue-observe-visibility": "^1.0.0",
+    "vue-router": "4",
+    "vue-spinner": "^1.0.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.0",

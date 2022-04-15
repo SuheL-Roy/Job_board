@@ -11,7 +11,10 @@
       xl:px-0
     "
   >
-    <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
+    <!-- <h2 class="text-2xl font-semibold text-indigo-500" >JOB Board</h2> -->
+    <h2 class="text-2xl font-semibold text-indigo-500">
+      <router-link :to="{ name:'home' }" > JOB Board </router-link>
+    </h2>
 
     <nav v-if="auth.loggedIn" class="flex gap-4 items-center">
       <a class="text-base" href="#">My posts</a>

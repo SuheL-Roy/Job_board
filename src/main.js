@@ -4,6 +4,9 @@ import "./index.css";
 import { createPinia } from 'pinia';
 import router from './router/index';
 import useAuthStore from './store/Auth';
+import 'vue-loading-overlay/dist/vue-loading.css';
+//import VueObserveVisibility from 'vue-observe-visibility'
+
 
 // const app = createApp(App);
 // const Auth = useAuthStore();
@@ -20,6 +23,9 @@ const app = createApp(App);
 
 const pania = createPinia();
 app.use(pania);
+
+//app.use(VueObserveVisibility)
+
 
 const auth = useAuthStore();
 

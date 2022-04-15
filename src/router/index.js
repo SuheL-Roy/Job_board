@@ -5,6 +5,7 @@ import Contact from '../pages/Contact.vue';
 import Register from '../pages/Register.vue';
 import Login from '../pages/Login.vue'
 import useAuthStore from '../store/auth';
+import TagAcrive from '../components/TagAcrive.vue';
 
 
 const routes=[
@@ -16,6 +17,11 @@ const routes=[
             auth:true
         }
        
+    },
+    {
+        path:'/tags/:slug',
+        name:"tagArchive",
+        component:TagAcrive,
     },
     {
         path: "/Con-tact",
