@@ -17,8 +17,8 @@
     </h2>
 
     <nav v-if="auth.loggedIn" class="flex gap-4 items-center">
-      <a class="text-base" href="#">My posts</a>
-      <a class="text-base button" href="#">
+      <router-link class="text-base" :to="{ name:'myJob' }">My posts</router-link>
+      <router-link class="text-base button" :to="{ name:'create' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"
@@ -32,7 +32,7 @@
           />
         </svg>
         <span>Post a job</span>
-      </a>
+      </router-link>
       <p>{{ auth.user.name }}</p>
       <button @click="logout">Logout</button>
     </nav>

@@ -14,8 +14,11 @@ import { useIntersectionObserver } from "@vueuse/core";
 import SyncLoader from "vue-spinner/src/SyncLoader.vue"
 import JobList from "../components/JobList.vue";
 import { onMounted, reactive, ref } from "vue";
+import useAuthStore from "../store/Auth";
 const loading = ref(false);
 const PaginationLoad = ref(false);
+
+const auth = useAuthStore();
 
 const jobs = ref([]);
 const target = ref(null);
@@ -26,7 +29,7 @@ const pagination = reactive({
 }) 
 
 
-  const { ok, data } = await api.get("/api/jobs");
+  const { ok, data } = await api.get(`/api/jobs?user_id=${auth.user.id}`);
 
   if (!ok) alert("something went wrong");
 
@@ -35,12 +38,12 @@ const pagination = reactive({
 
   pagination.last_page= data.meta.last_page;
   pagination.page=data.meta.current_page;
- // console.log(data.data);
+
 
 useIntersectionObserver(target, async([{ isIntersecting }]) => {
   if(isIntersecting && pagination.page < pagination.last_page){
    PaginationLoad.value = true;
-   const { ok, data } = await api.get(`/api/jobs?page=${++pagination.page}`);
+   const { ok, data } = await api.get(`/api/jobs?page=${++pagination.page}&user_id=${auth.user.id}`);
    if(!ok) alert('failed to job load');
    jobs.value = [...jobs.value,...data.data];
    PaginationLoad.value = false;

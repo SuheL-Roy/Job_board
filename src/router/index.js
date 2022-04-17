@@ -7,7 +7,10 @@ import Login from '../pages/Login.vue'
 import useAuthStore from '../store/auth';
 import TagAcrive from '../components/TagAcrive.vue';
 import JobDetails from '../pages/JobDetail.vue';
-
+import MyJob from '../components/Myjob.vue';
+import JobFromLayout from '../components/JobFromLayout.vue';
+import Update from '../pages/Update.vue';
+import Create from '../pages/Create.vue';
 
 const routes=[
     {
@@ -20,9 +23,38 @@ const routes=[
        
     },
     {
+        name:"jobFromLayout",
+        path:'/jobs',
+        component:JobFromLayout,
+        meta:{
+            auth:true
+        },
+        children:[
+
+            {
+                name:"create",
+                path:'create',
+                component:Create,
+            },
+
+            {
+                name:"update",
+                path:'update/:id',
+                component:Update,
+            },
+
+        ]
+       
+    },
+    {
         name:"jobDetails",
         path:'/:slug',
         component:JobDetails,
+    },
+    {
+        name:"myJob",
+        path:'/my-job',
+        component:MyJob,
     },
     {
         path:'/tags/:slug',
@@ -45,6 +77,7 @@ const routes=[
         name:"login",
         component: Login
     },
+
     
    
    
