@@ -1,7 +1,9 @@
 <template>
-  
-    <select name="" id="" v-model="selected" >
+  <div class="flex flex-col w-full">
+    <label :for="name">{{label}}</label>
+    <select @input="$emit('update:modelValue', $event.target.value)">
       <option
+        :selected="modelValue === option.value"
         v-for="option in options"
         :value="option.value"
         :key="option.value"
@@ -9,40 +11,41 @@
         {{ option.label }}
       </option>
     </select>
+    <p v-if="helperText" class="text-sm" :class="{ 'text-red-500': hasError }">
+      {{ helperText }}
+    </p>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "@vue/reactivity";
 
-const options = ref([
-    {
-        label:"FullTime",
-        value:"full_time"
-    },
-     {
-        label:"PartTime",
-        value:"part_time"
-    },
-     {
-        label:"Contract",
-        value:"contract"
-    },
-     {
-        label:"Temporary",
-        value:"temporary"
-    },
-     {
-        label:"Internship",
-        value:"internship"
-    },
-    {
-        label:"Volunteer",
-        value:"volunteer"
-    },
-    {
-        label:"Remote",
-        value:"remote"
-    }
-])
-const selected = ref(null); 
+defineProps({
+  options: {
+    type: Array,
+    required: true,
+  },
+  modelValue: {
+    default: "",
+    type: String,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+
+  label: {
+    type: String,
+    default: "",
+    required: true,
+  },  
+  helperText: {
+    type: String,
+    default: "",
+  },
+  hasError: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
