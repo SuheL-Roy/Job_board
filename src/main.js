@@ -3,8 +3,9 @@ import App from "./App.vue";
 import "./index.css";
 import { createPinia } from 'pinia';
 import router from './router/index';
+import "vue-loading-overlay/dist/vue-loading.css";
 import useAuthStore from './store/Auth';
-import 'vue-loading-overlay/dist/vue-loading.css';
+// import 'vue-loading-overlay/dist/vue-loading.css';
 //import VueObserveVisibility from 'vue-observe-visibility'
 
 

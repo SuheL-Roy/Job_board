@@ -21,7 +21,7 @@
     "vue": "^3.2.25",
     "vue-filepond": "^7.0.3",
     "vue-loading-overlay": "^5.0.3",
-    "vue-multiselect": "^2.1.6",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "4",
     "vue-spinner": "^1.0.4"

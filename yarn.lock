@@ -1187,10 +1187,10 @@
   "resolved" "https://registry.npmjs.org/vue-loading-overlay/-/vue-loading-overlay-5.0.3.tgz"
   "version" "5.0.3"
 
-"vue-multiselect@^2.1.6":
-  "integrity" "sha512-s7jmZPlm9FeueJg1RwJtnE9KNPtME/7C8uRWSfp9/yEN4M8XcS/d+bddoyVwVnvFyRh9msFo0HWeW0vTL8Qv+w=="
-  "resolved" "https://registry.npmjs.org/vue-multiselect/-/vue-multiselect-2.1.6.tgz"
-  "version" "2.1.6"
+"vue-multiselect@^3.0.0-alpha.2":
+  "integrity" "sha512-Xp9fGJECns45v+v8jXbCIsAkCybYkEg0lNwr7Z6HDUSMyx2TEIK2giipPE+qXiShEc1Ipn+ZtttH2iq9hwXP4Q=="
+  "resolved" "https://registry.npmjs.org/vue-multiselect/-/vue-multiselect-3.0.0-alpha.2.tgz"
+  "version" "3.0.0-alpha.2"
 
 "vue-observe-visibility@^1.0.0":
   "integrity" "sha512-s5TFh3s3h3Mhd3jaz3zGzkVHKHnc/0C/gNr30olO99+yw2hl3WBhK3ng3/f9OF+qkW4+l7GkmwfAzDAcY3lCFg=="

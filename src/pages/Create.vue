@@ -10,9 +10,11 @@
       <Input name="title" label="Application Link" v-model="form.link" />
       <Input name="title" label="company Name" v-model="form.company_name" />
       <Input name="title" label="Description" v-model="form.description" />
+      <!-- <Input name="title" label="Tags" v-model="form.tags" /> -->
+      <JobtagInput class="bg-slate-50 rounded-sm w-full" v-model="form.tags"  name="Tags"/>
       <SelectInput :options="options" v-model="form.type" label="Select job type" />
       <FileUploader v-model="form.company_logo"/>
-      <Editior v-model="form.description"/>
+      <Editior v-model="form.description" label="description"/>
     </form>
   </div>
 </template>
@@ -22,6 +24,7 @@ import { reactive, ref } from "@vue/reactivity";
 import Input from "../components/Form/Input.vue";
 import SelectInput from "../components/Form/SelectInput.vue";
 import Editior from '../components/Form/Editior.vue';
+import JobtagInput from "../components/Form/JobtagInput.vue";
 import FileUploader from "../components/Form/FileUploader.vue";
 
 const options = ref([
@@ -60,9 +63,10 @@ const form = reactive({
   location: "",
   link: "",
   company_name: "",
-  description: "<h3>description</h3>",
+  description: "",
   company_logo: "",
-  type: "internship",
+  type: "",
+  tags: [],
 });
 </script>
 
