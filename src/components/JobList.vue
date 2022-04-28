@@ -66,7 +66,8 @@
               Details
             </router-link>
             <a
-              href="#"
+              target="_blank"
+              :href="job.link"
               class="inline-block px-3 py-2 font-bold text-indigo-400 bg-white border-2 border-indigo-400 rounded-lg hover:text-opacity-80"
             >
               Apply for this job
